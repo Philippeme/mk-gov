@@ -109,8 +109,8 @@
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-6">
-                    <div class="quick-action-card" (click)="onServiceClick(serviceCategories[0]?.services[0])"
-                        *ngIf="serviceCategories.length > 0 && serviceCategories[0].services.length > 0">
+                    <div class="quick-action-card"
+                        (click)="getPassportService() && onServiceClick(getPassportService()!)">
                         <i class="fas fa-passport"></i>
                         <h5>Apply for Passport</h5>
                         <p>Start your passport application process</p>

@@ -204,7 +204,8 @@ export class PassportApplicationComponent implements OnInit {
     return isValid;
   }
 
-  private validateDocumentUploads(): boolean {
+  // Rendre cette méthode publique pour l'utiliser dans le template
+  validateDocumentUploads(): boolean {
     const requiredDocs = this.requiredDocuments.filter(doc => doc.required);
     const uploadedRequiredDocs = requiredDocs.filter(doc => this.uploadedFiles[doc.id]);
     return uploadedRequiredDocs.length === requiredDocs.length;

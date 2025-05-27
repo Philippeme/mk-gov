@@ -4,13 +4,13 @@ import { delay, map } from 'rxjs/operators';
 import {
   Application,
   ApplicationStatus,
-  ApplicantType,
   Payment,
   PaymentMethod,
   PaymentStatus,
   ApplicationTimeline,
   TimelineStatus
 } from '../models/application.model';
+import { ApplicantType } from '../models/service.model';
 
 @Injectable({
   providedIn: 'root'

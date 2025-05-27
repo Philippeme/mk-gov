@@ -84,4 +84,14 @@ export class HomeComponent implements OnInit {
   getCategoryIcon(icon: string): string {
     return icon || 'fas fa-cog';
   }
+
+  getPassportService(): Service | null {
+    for (const category of this.serviceCategories) {
+      const passportService = category.services.find(service => service.id === 'passport');
+      if (passportService) {
+        return passportService;
+      }
+    }
+    return null;
+  }
 }
