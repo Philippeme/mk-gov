@@ -1,0 +1,281 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap';
+
+// Custom CSS Variables
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #34a853;
+    --warning-color: #fbbc04;
+    --danger-color: #ea4335;
+    --success-color: #34a853;
+    --dark-color: #202124;
+    --light-color: #f8f9fa;
+    --cameroon-green: #009639;
+    --cameroon-red: #ce1126;
+    --cameroon-yellow: #fcdd09;
+
+    --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --border-radius: 8px;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+// Global Styles
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-primary);
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+// Custom Bootstrap Overrides
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    border-radius: var(--border-radius);
+    font-weight: 500;
+    padding: 12px 24px;
+    transition: var(--transition);
+
+    &:hover {
+        background-color: darken(var(--primary-color), 10%);
+        border-color: darken(var(--primary-color), 10%);
+        transform: translateY(-1px);
+    }
+}
+
+.btn-success {
+    background-color: var(--cameroon-green);
+    border-color: var(--cameroon-green);
+}
+
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.form-control {
+    border-radius: var(--border-radius);
+    border: 1px solid #dadce0;
+    padding: 12px 16px;
+    transition: var(--transition);
+
+    &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.25);
+    }
+}
+
+// Loading Overlay
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+
+    .loading-spinner {
+        background-color: white;
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        text-align: center;
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+// Service Category Cards
+.service-category-card {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .category-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .category-name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .category-description {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+}
+
+// Service List Items
+.service-item {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .service-name {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .service-description {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .service-meta {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+
+        .meta-item {
+            display: inline-block;
+            margin-right: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+
+            i {
+                margin-right: 0.25rem;
+            }
+        }
+    }
+}
+
+// Timeline Styles
+.timeline {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: 20px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--primary-color);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 60px;
+
+        .timeline-marker {
+            position: absolute;
+            left: 12px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+
+            &.completed {
+                background: var(--success-color);
+                box-shadow: 0 0 0 3px var(--success-color);
+            }
+
+            &.pending {
+                background: #ccc;
+                box-shadow: 0 0 0 3px #ccc;
+            }
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+
+            .timeline-title {
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .timeline-description {
+                color: #666;
+                margin-bottom: 0.5rem;
+            }
+
+            .timeline-duration {
+                font-size: 0.8rem;
+                color: #888;
+            }
+        }
+    }
+}
+
+// Cameroon Flag Colors Helper Classes
+.bg-cameroon-green {
+    background-color: var(--cameroon-green) !important;
+}
+
+.bg-cameroon-red {
+    background-color: var(--cameroon-red) !important;
+}
+
+.bg-cameroon-yellow {
+    background-color: var(--cameroon-yellow) !important;
+}
+
+.text-cameroon-green {
+    color: var(--cameroon-green) !important;
+}
+
+.text-cameroon-red {
+    color: var(--cameroon-red) !important;
+}
+
+.text-cameroon-yellow {
+    color: var(--cameroon-yellow) !important;
+}

@@ -1,0 +1,168 @@
+{
+    "app": {
+        "title": "MK Gov",
+        "subtitle": "Government Portal for Cameroon Citizens",
+        "welcome": "Welcome to MK Gov"
+    },
+    "navigation": {
+        "home": "Home",
+        "procedures": "Procedures",
+        "registration": "Registration",
+        "login": "Login",
+        "search_files": "Search Files",
+        "logout": "Logout",
+        "my_account": "My Account",
+        "language": "Language"
+    },
+    "categories": {
+        "police_justice": {
+            "name": "Police & Justice",
+            "description": "Identity documents, judicial records, and legal services"
+        },
+        "family": {
+            "name": "Family",
+            "description": "Civil status documents and family-related services"
+        },
+        "transport": {
+            "name": "Transport",
+            "description": "Driving licenses, vehicle registration, and transport permits"
+        },
+        "education": {
+            "name": "Education",
+            "description": "Diploma certification, educational authorizations"
+        },
+        "business": {
+            "name": "Business",
+            "description": "Company registration, business permits, and commercial services"
+        },
+        "public_service": {
+            "name": "Public Service",
+            "description": "Civil service applications and administrative procedures"
+        },
+        "land_construction": {
+            "name": "Land & Construction",
+            "description": "Land titles, building permits, and property certificates"
+        },
+        "consular": {
+            "name": "Consular Services",
+            "description": "Visa applications and document legalization"
+        },
+        "health": {
+            "name": "Health",
+            "description": "Healthcare facility authorizations and medical services"
+        },
+        "civic_life": {
+            "name": "Civic Life",
+            "description": "Event permits and civic activities authorization"
+        }
+    },
+    "services": {
+        "passport": {
+            "name": "Passport Application",
+            "description": "Apply for a Cameroonian passport",
+            "detailed_description": "Electronic service for applying for a Cameroonian passport. The application is processed by local government authorities through the DGSN digital platform."
+        },
+        "birth_certificate_copy": {
+            "name": "Certified Copy of Birth Certificate",
+            "description": "Request a certified copy of birth certificate",
+            "detailed_description": "Service to obtain a certified copy of a birth certificate. The request is processed by the civil registry where the birth was registered."
+        },
+        "national_id": {
+            "name": "National Identity Card",
+            "description": "Apply for national identity card",
+            "detailed_description": "Service for requesting a national identity card or renewing an existing one."
+        }
+    },
+    "forms": {
+        "login": {
+            "title": "Login",
+            "phone_email": "Phone Number or Email",
+            "password": "Password",
+            "forgot_password": "Forgot Password?",
+            "login_button": "Login",
+            "no_account": "Don't have an account?",
+            "create_account": "Create one",
+            "terms_text": "By logging in, you accept the terms of use including the privacy policy of MK Gov"
+        },
+        "registration": {
+            "title": "Registration",
+            "account_type": "Account Type",
+            "local_citizen": "Local Citizen",
+            "diaspora_citizen": "Diaspora Citizen",
+            "cni_number": "National ID Number",
+            "consular_card": "Consular Card Number",
+            "phone_number": "Phone Number",
+            "email": "Email Address",
+            "password": "Password",
+            "confirm_password": "Confirm Password",
+            "register_button": "Register",
+            "already_have_account": "Already have an account?",
+            "login_link": "Login",
+            "step1": "Send required information",
+            "step2": "Account verification",
+            "step3": "Create your password",
+            "terms_acceptance": "By registering, you accept the new terms of use including the privacy policy of MK Gov"
+        },
+        "service_application": {
+            "apply_for": "Who are you applying for?",
+            "self": "Myself",
+            "child": "My child",
+            "other": "Someone else",
+            "apply_button": "Apply",
+            "processing_time": "Processing Time",
+            "cost": "Cost",
+            "provided_by": "Provided by",
+            "required_documents": "Required Documents"
+        }
+    },
+    "requirements": {
+        "passport_form": "Passport Application Form",
+        "passport_form_desc": "Completed passport application form",
+        "birth_certificate": "Birth Certificate",
+        "birth_cert_desc": "Certified copy of birth certificate (less than 3 months old)",
+        "national_id": "National Identity Card",
+        "national_id_desc": "Copy of valid national identity card",
+        "passport_photos": "Passport Photos",
+        "passport_photos_desc": "12 standardized passport photos",
+        "residence_proof": "Proof of Residence",
+        "residence_proof_desc": "Residence certificate from local administration",
+        "request_form": "Request Form",
+        "request_form_desc": "Completed request form for certified copy",
+        "fiscal_stamp": "Fiscal Stamp",
+        "fiscal_stamp_desc": "200 XAF fiscal stamp",
+        "requester_id": "Requester's ID",
+        "requester_id_desc": "Valid identification document of the requester"
+    },
+    "buttons": {
+        "submit": "Submit",
+        "cancel": "Cancel",
+        "continue": "Continue",
+        "back": "Back",
+        "close": "Close",
+        "save": "Save",
+        "search": "Search",
+        "apply": "Apply",
+        "download": "Download",
+        "upload": "Upload",
+        "pay": "Pay",
+        "confirm": "Confirm"
+    },
+    "messages": {
+        "loading": "Loading...",
+        "success": "Success",
+        "error": "Error",
+        "warning": "Warning",
+        "info": "Information",
+        "no_results": "No results found",
+        "coming_soon": "Coming Soon",
+        "service_not_available": "This service is not yet available online",
+        "login_required": "Please login to access this service",
+        "payment_simulation": "This is a payment simulation for demonstration purposes"
+    },
+    "timeline": {
+        "pending": "Pending",
+        "in_progress": "In Progress",
+        "completed": "Completed",
+        "estimated_duration": "Estimated Duration"
+    }
+}
