@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -39,6 +39,12 @@ import { AuthService } from './services/auth.service';
 import { ServicesDataService } from './services/services-data.service';
 import { ApplicationService } from './services/application.service';
 
+// Interceptors
+import { HttpErrorInterceptor } from './interceptors/http.interceptor';
+
+// Guards
+import { AuthGuard } from './guards/auth.guard';
+
 // Translation loader function
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -75,15 +81,48 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
-      defaultLanguage: 'en'
+      defaultLanguage: 'en',
+      useDefaultLang: true
     })
   ],
   providers: [
     TranslationService,
     AuthService,
     ServicesDataService,
-    ApplicationService
+    ApplicationService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    // Initialize application settings
+    this.initializeApplicationDefaults();
+  }
+
+  private initializeApplicationDefaults(): void {
+    // Set default language based on browser locale or user preference
+    const savedLanguage = localStorage.getItem('mk-gov-language');
+    if (!savedLanguage) {
+      const browserLang = navigator.language.split('-')[0];
+      const supportedLanguages = ['en', 'fr', 'pt'];
+      const defaultLang = supportedLanguages.includes(browserLang) ? browserLang : 'en';
+      localStorage.setItem('mk-gov-language', defaultLang);
+    }
+
+    // Set application metadata
+    document.title = 'MK Gov - Digital Government Portal';
+
+    // Configure meta tags for SEO and social sharing
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content',
+        'MK Gov is the official digital government portal for Cameroon citizens, providing easy access to government services including passport applications, birth certificates, and more.');
+    }
+  }
+}
