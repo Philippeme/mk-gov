@@ -213,6 +213,34 @@
         "next": "Next",
         "previous": "Previous"
     },
+     "agencies": {
+        "dgsn": "DGSN - Direction Générale de la Sûreté Nationale",
+        "ministry_justice": "Ministry of Justice",
+        "ministry_transport": "Ministry of Transport", 
+        "ministry_education": "Ministry of Higher Education",
+        "cfce": "CFCE - Business Creation Center",
+        "ministry_public_service": "Ministry of Public Service",
+        "ministry_state_property": "Ministry of State Property",
+        "ministry_external_relations": "Ministry of External Relations",
+        "ministry_public_health": "Ministry of Public Health",
+        "prefecture": "Prefecture Services"
+    },
+    "footer": {
+        "government_agencies": "Government Agencies & Service Providers",
+        "popular_services": "Popular Services",
+        "legal_notice": "Legal Notice",
+        "legal_text": "This platform is an official government portal. All transactions are secured and monitored. For technical issues, contact our support team. Data protection complies with Cameroon's digital governance standards.",
+        "copyright": "Digital Government Portal. All rights reserved.",
+        "ministry_attribution": "Republic of Cameroon - Ministry of Public Service and Administrative Reform",
+        "contact_phone": "+237 2XX XXX XXX",
+        "contact_email": "info@mkgov.cm", 
+        "service_hours": "24/7 Online Services",
+        "badges": {
+            "secure": "Secure",
+            "mobile_ready": "Mobile Ready",
+            "accessible": "Accessible"
+        }
+    },
     "messages": {
         "loading": "Loading...",
         "success": "Success",
