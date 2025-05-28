@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '../../services/application.service';
 import { AuthService } from '../../services/auth.service';
 import { Application, ApplicationStatus, PaymentMethod, PaymentStatus } from '../../models/application.model';
+import { ApplicantType } from '../../models/service.model';
 
 @Component({
   selector: 'app-birth-certificate',
@@ -108,7 +109,7 @@ export class BirthCertificateComponent implements OnInit {
       this.applicationService.createApplication(
         'birth-certificate-copy',
         'Birth Certificate Copy',
-        'self',
+        ApplicantType.SELF,
         currentUser.id!
       ).subscribe({
         next: (application) => {

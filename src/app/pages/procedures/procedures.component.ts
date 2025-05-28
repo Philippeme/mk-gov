@@ -127,11 +127,20 @@ export class ProceduresComponent implements OnInit {
     this.router.navigate(['/procedures']);
   }
 
-  getCategoryById(categoryId: string): ServiceCategory | undefined {
+  getCategoryById(categoryId: string | null): ServiceCategory | undefined {
+    if (!categoryId) {
+      return undefined;
+    }
     return this.serviceCategories.find(cat => cat.id === categoryId);
   }
 
   getCategoryIcon(icon: string): string {
     return icon || 'fas fa-cog';
+  }
+
+  // Helper method for template to safely get category name
+  getCategoryName(categoryId: string | null): string {
+    const category = this.getCategoryById(categoryId);
+    return category ? category.nameKey : '';
   }
 }

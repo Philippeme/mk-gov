@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ApplicationService } from '../../services/application.service';
 import { AuthService } from '../../services/auth.service';
 import { Application, ApplicationStatus, PaymentMethod, PaymentStatus } from '../../models/application.model';
+import { ApplicantType } from '../../models/service.model';
 
 @Component({
   selector: 'app-passport-application',
@@ -115,7 +116,7 @@ export class PassportApplicationComponent implements OnInit {
       this.applicationService.createApplication(
         'passport',
         'Passport Application',
-        'self',
+        ApplicantType.SELF,
         currentUser.id!
       ).subscribe({
         next: (application) => {

@@ -20,8 +20,8 @@
                                         {{ 'navigation.procedures' | translate }}
                                     </a>
                                 </li>
-                                <li class="breadcrumb-item active">
-                                    {{ getCategoryById(selectedCategory)?.nameKey | translate }}
+                                <li class="breadcrumb-item active" *ngIf="getCategoryById(selectedCategory)">
+                                    {{ getCategoryById(selectedCategory)!.nameKey | translate }}
                                 </li>
                             </ol>
                         </nav>
