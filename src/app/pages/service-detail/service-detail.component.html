@@ -43,10 +43,10 @@
                     </div>
                     <div class="col-md-4 text-md-end">
                         <div class="service-status">
-                            <span class="badge badge-lg" [class.bg-success]="service.isImplemented"
-                                [class.bg-secondary]="!service.isImplemented">
-                                <i class="fas" [class.fa-check-circle]="service.isImplemented"
-                                    [class.fa-clock]="!service.isImplemented" class="me-2"></i>
+                            <span class="badge badge-lg"
+                                [ngClass]="service.isImplemented ? 'bg-success' : 'bg-secondary'">
+                                <i [ngClass]="service.isImplemented ? 'fas fa-check-circle' : 'fas fa-clock'"
+                                    class="me-2"></i>
                                 {{ service.isImplemented ? 'Available Online' : 'Coming Soon' }}
                             </span>
                         </div>
