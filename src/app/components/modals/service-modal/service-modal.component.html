@@ -1,12 +1,12 @@
 <div class="modal-header">
-    <h4 class="modal-title">{{ service.nameKey | translate }}</h4>
+    <h4 class="modal-title">{{ service.pname }}</h4>
     <button type="button" class="btn-close" (click)="close()"></button>
 </div>
 
 <div class="modal-body">
     <!-- Service Description -->
     <div class="service-description mb-4">
-        <p class="text-muted">{{ service.detailedDescriptionKey | translate }}</p>
+        <p class="text-muted">{{ service.longdesc }}</p>
     </div>
 
     <!-- Service Details -->
@@ -16,7 +16,7 @@
                 <i class="fas fa-clock text-primary me-2"></i>
                 <strong>{{ 'forms.service_application.processing_time' | translate }}:</strong>
                 <br>
-                <span class="text-muted">{{ service.processingTime }}</span>
+                <span class="text-muted">{{ service.processtime }}</span>
             </div>
         </div>
         <div class="col-md-4">
@@ -24,7 +24,7 @@
                 <i class="fas fa-money-bill-wave text-success me-2"></i>
                 <strong>{{ 'forms.service_application.cost' | translate }}:</strong>
                 <br>
-                <span class="text-muted">{{ formatCurrency(service.cost, service.currency) }}</span>
+                <span class="text-muted">{{ formatCurrency(service.servicecost, service.currency) }}</span>
             </div>
         </div>
         <div class="col-md-4">
@@ -38,17 +38,17 @@
     </div>
 
     <!-- Required Documents -->
-    <div class="mb-4" *ngIf="service.requirements && service.requirements.length > 0">
+    <div class="mb-4" *ngIf="service.documents && service.documents.length > 0">
         <h6 class="mb-3">{{ 'forms.service_application.required_documents' | translate }}:</h6>
         <ul class="list-group">
-            <li class="list-group-item d-flex align-items-center" *ngFor="let requirement of service.requirements">
+            <li class="list-group-item d-flex align-items-center" *ngFor="let requirement of service.documents">
                 <i class="fas fa-file-alt text-primary me-3"></i>
                 <div>
-                    <strong>{{ requirement.nameKey | translate }}</strong>
+                    <strong>{{ requirement.name }}</strong>
                     <br>
-                    <small class="text-muted">{{ requirement.descriptionKey | translate }}</small>
+                    <small class="text-muted">{{ requirement.description }}</small>
                 </div>
-                <span class="badge bg-danger ms-auto" *ngIf="requirement.isMandatory">Required</span>
+                <span class="badge bg-danger ms-auto" *ngIf="requirement.isRequired">Required</span>
             </li>
         </ul>
     </div>
@@ -80,12 +80,12 @@
     </div>
 
     <!-- Warning Note -->
-    <div class="alert alert-warning" *ngIf="service.isImplemented">
+    <div class="alert alert-warning" *ngIf="service.published">
         <i class="fas fa-info-circle me-2"></i>
         This service is fully implemented with real Cameroonian administrative procedures.
     </div>
 
-    <div class="alert alert-info" *ngIf="!service.isImplemented">
+    <div class="alert alert-info" *ngIf="!service.published">
         <i class="fas fa-construction me-2"></i>
         {{ 'messages.service_not_available' | translate }}
     </div>
@@ -95,7 +95,7 @@
     <button type="button" class="btn btn-secondary" (click)="close()">
         {{ 'buttons.cancel' | translate }}
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="!service.isImplemented || isLoading" (click)="onApply()">
+    <button type="button" class="btn btn-primary" [disabled]="!service.published || isLoading" (click)="onApply()">
         <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
         {{ 'forms.service_application.apply_button' | translate }}
     </button>
