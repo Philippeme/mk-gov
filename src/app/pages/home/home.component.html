@@ -52,23 +52,23 @@
                             <div class="category-icon">
                                 <i [class]="getCategoryIcon(category.icon)"></i>
                             </div>
-                            <h4 class="category-title">{{ category.nameKey | translate }}</h4>
+                            <h4 class="category-title">{{ category.fname }}</h4>
                         </div>
-                        <p class="category-description">{{ category.descriptionKey | translate }}</p>
+                        <p class="category-description">{{ category.description }}</p>
 
                         <!-- Services List -->
-                        <div class="services-list" *ngIf="category.services && category.services.length > 0">
+                        <div class="services-list" *ngIf="category.procedures && category.procedures.length > 0">
                             <h6 class="services-title">Available Services:</h6>
                             <ul class="list-unstyled">
-                                <li *ngFor="let service of category.services | slice:0:3" class="service-link"
+                                <li *ngFor="let service of category.procedures | slice:0:3" class="service-link"
                                     (click)="onServiceClick(service); $event.stopPropagation()">
                                     <i class="fas fa-chevron-right me-2"></i>
-                                    {{ service.nameKey | translate }}
-                                    <span class="badge bg-success ms-2" *ngIf="service.isImplemented">Live</span>
-                                    <span class="badge bg-secondary ms-2" *ngIf="!service.isImplemented">Soon</span>
+                                    {{ service.pname }}
+                                    <span class="badge bg-success ms-2" *ngIf="service.published">Live</span>
+                                    <span class="badge bg-secondary ms-2" *ngIf="!service.published">Soon</span>
                                 </li>
-                                <li *ngIf="category.services.length > 3" class="text-muted small">
-                                    +{{ category.services.length - 3 }} more services
+                                <li *ngIf="category.procedures.length > 3" class="text-muted small">
+                                    +{{ category.procedures.length - 3 }} more services
                                 </li>
                             </ul>
                         </div>
