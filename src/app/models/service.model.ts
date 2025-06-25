@@ -1,34 +1,39 @@
 export interface ServiceCategory {
   id: string;
-  nameKey: string;
-  descriptionKey: string;
+  fname: string;
+  description: string;
   icon: string;
   color: string;
-  services: Service[];
+  displayOrder: number;
+  isActive: boolean;
+  procedures: Service[];
 }
 
 export interface Service {
   id: string;
   categoryId: string;
-  nameKey: string;
-  descriptionKey: string;
-  detailedDescriptionKey: string;
-  requirements: ServiceRequirement[];
-  processingTime: string;
-  cost: number;
+  pname: string;
+  shortdesc: string;
+  longdesc: string;
+  documents: ServiceRequirement[];
+  processtime: string;
+  servicecost: number;
   currency: string;
   providedBy: string;
-  legalTexts?: LegalText[];
-  isImplemented: boolean;
+  legaltext?: string;
+  published: boolean;
+  displayOrder: number;
+  isActive: boolean;
   canApplyFor: ApplicantType[];
 }
 
 export interface ServiceRequirement {
   id: string;
-  nameKey: string;
-  descriptionKey: string;
-  isMandatory: boolean;
+  name: string;
+  description: string;
+  isRequired: boolean;
   documentType: DocumentType;
+  type: string;
 }
 
 export interface LegalText {
