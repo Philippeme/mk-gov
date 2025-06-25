@@ -31,23 +31,23 @@
                             <a routerLink="/procedures">Procedures</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            {{ service.nameKey | translate }}
+                            {{ service.pname }}
                         </li>
                     </ol>
                 </nav>
 
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="service-title">{{ service.nameKey | translate }}</h1>
-                        <p class="service-subtitle">{{ service.descriptionKey | translate }}</p>
+                        <h1 class="service-title">{{ service.pname }}</h1>
+                        <p class="service-subtitle">{{ service.shortdesc }}</p>
                     </div>
                     <div class="col-md-4 text-md-end">
                         <div class="service-status">
                             <span class="badge badge-lg"
-                                [ngClass]="service.isImplemented ? 'bg-success' : 'bg-secondary'">
-                                <i [ngClass]="service.isImplemented ? 'fas fa-check-circle' : 'fas fa-clock'"
+                                [ngClass]="service.published ? 'bg-success' : 'bg-secondary'">
+                                <i [ngClass]="service.published ? 'fas fa-check-circle' : 'fas fa-clock'"
                                     class="me-2"></i>
-                                {{ service.isImplemented ? 'Available Online' : 'Coming Soon' }}
+                                {{ service.published ? 'Available Online' : 'Coming Soon' }}
                             </span>
                         </div>
                     </div>
@@ -64,21 +64,17 @@
                                 Service Description
                             </h3>
                             <div class="card-content">
-                                <p class="description-text">{{ service.detailedDescriptionKey | translate }}</p>
+                                <p class="description-text">{{ service.longdesc }}</p>
 
                                 <!-- Legal Texts -->
-                                <div class="legal-texts" *ngIf="service.legalTexts && service.legalTexts.length > 0">
+                                <div class="legal-texts" *ngIf="service.legaltext">
                                     <h5 class="mt-4 mb-3">Legal Framework</h5>
-                                    <div class="legal-document" *ngFor="let legalText of service.legalTexts">
+                                    <div class="legal-document">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div>
-                                                <h6 class="legal-title">{{ legalText.title }}</h6>
-                                                <p class="legal-excerpt">{{ legalText.content | slice:0:150 }}...</p>
+                                                <h6 class="legal-title">Legal Reference</h6>
+                                                <p class="legal-excerpt">{{ service.legaltext }}</p>
                                             </div>
-                                            <button class="btn btn-outline-primary btn-sm" *ngIf="legalText.pdfUrl">
-                                                <i class="fas fa-download me-2"></i>
-                                                Download PDF
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +92,7 @@
                                 </div>
                                 <div class="detail-content">
                                     <strong>Processing Time</strong>
-                                    <span>{{ service.processingTime }}</span>
+                                    <span>{{ service.processtime }}</span>
                                 </div>
                             </div>
 
@@ -106,7 +102,7 @@
                                 </div>
                                 <div class="detail-content">
                                     <strong>Cost</strong>
-                                    <span>{{ formatCurrency(service.cost, service.currency) }}</span>
+                                    <span>{{ formatCurrency(service.servicecost, service.currency) }}</span>
                                 </div>
                             </div>
 
@@ -121,13 +117,13 @@
                             </div>
 
                             <!-- Apply Button -->
-                            <button class="btn btn-primary btn-lg w-100 mt-4" [disabled]="!service.isImplemented"
+                            <button class="btn btn-primary btn-lg w-100 mt-4" [disabled]="!service.published"
                                 (click)="onApplyForService()">
                                 <i class="fas fa-paper-plane me-2"></i>
-                                {{ service.isImplemented ? 'Apply Now' : 'Coming Soon' }}
+                                {{ service.published ? 'Apply Now' : 'Coming Soon' }}
                             </button>
 
-                            <div class="alert alert-info mt-3" *ngIf="!service.isImplemented">
+                            <div class="alert alert-info mt-3" *ngIf="!service.published">
                                 <small>
                                     <i class="fas fa-info-circle me-2"></i>
                                     This service will be available online soon. Please visit the relevant office for
@@ -140,28 +136,28 @@
             </div>
 
             <!-- Required Documents -->
-            <div class="required-documents mb-5" *ngIf="service.requirements && service.requirements.length > 0">
+            <div class="required-documents mb-5" *ngIf="service.documents && service.documents.length > 0">
                 <h3 class="section-title">
                     <i class="fas fa-file-alt me-2"></i>
                     Required Documents
                 </h3>
 
                 <div class="row g-3">
-                    <div class="col-md-6" *ngFor="let requirement of service.requirements">
+                    <div class="col-md-6" *ngFor="let requirement of service.documents">
                         <div class="document-card">
                             <div class="document-header">
                                 <div class="document-icon">
                                     <i class="fas fa-file-alt"></i>
                                 </div>
                                 <div class="document-info">
-                                    <h6 class="document-name">{{ requirement.nameKey | translate }}</h6>
-                                    <span class="badge" [class.bg-danger]="requirement.isMandatory"
-                                        [class.bg-secondary]="!requirement.isMandatory">
-                                        {{ requirement.isMandatory ? 'Required' : 'Optional' }}
+                                    <h6 class="document-name">{{ requirement.name }}</h6>
+                                    <span class="badge" [class.bg-danger]="requirement.isRequired"
+                                        [class.bg-secondary]="!requirement.isRequired">
+                                        {{ requirement.isRequired ? 'Required' : 'Optional' }}
                                     </span>
                                 </div>
                             </div>
-                            <p class="document-description">{{ requirement.descriptionKey | translate }}</p>
+                            <p class="document-description">{{ requirement.description }}</p>
                         </div>
                     </div>
                 </div>
