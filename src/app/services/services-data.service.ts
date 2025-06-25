@@ -9,429 +9,473 @@ export class ServicesDataService {
   private serviceCategories: ServiceCategory[] = [
     {
       id: 'police-justice',
-      nameKey: 'categories.police_justice.name',
-      descriptionKey: 'categories.police_justice.description',
+      fname: 'Police & Justice',
+      description: 'Identity documents, judicial records, and legal services',
       icon: 'fas fa-balance-scale',
       color: '#1a73e8',
-      services: [
+      displayOrder: 1,
+      isActive: true,
+      procedures: [
         {
           id: 'passport',
           categoryId: 'police-justice',
-          nameKey: 'services.passport.name',
-          descriptionKey: 'services.passport.description',
-          detailedDescriptionKey: 'services.passport.detailed_description',
-          requirements: [
+          pname: 'Passport Application',
+          shortdesc: 'Apply for a Cameroonian biometric passport online',
+          longdesc: 'Electronic service for applying for a Cameroonian biometric passport. The application is processed by the General Delegation for National Security (DGSN) through their digital platform. The new biometric passport features advanced security technology with an integrated electronic chip and is internationally recognized.',
+          documents: [
             {
               id: 'passport-form',
-              nameKey: 'requirements.passport_form',
-              descriptionKey: 'requirements.passport_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Passport Application Form',
+              description: 'Completed passport application form with accurate information',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             },
             {
               id: 'birth-cert',
-              nameKey: 'requirements.birth_certificate',
-              descriptionKey: 'requirements.birth_cert_desc',
-              isMandatory: true,
-              documentType: DocumentType.BIRTH_CERTIFICATE
+              name: 'Birth Certificate',
+              description: 'Certified copy of birth certificate (less than 3 months old)',
+              isRequired: true,
+              documentType: DocumentType.BIRTH_CERTIFICATE,
+              type: 'input'
             },
             {
               id: 'national-id',
-              nameKey: 'requirements.national_id',
-              descriptionKey: 'requirements.national_id_desc',
-              isMandatory: true,
-              documentType: DocumentType.IDENTITY
+              name: 'National Identity Card',
+              description: 'Copy of valid national identity card or consular card',
+              isRequired: true,
+              documentType: DocumentType.IDENTITY,
+              type: 'input'
             },
             {
               id: 'photos',
-              nameKey: 'requirements.passport_photos',
-              descriptionKey: 'requirements.passport_photos_desc',
-              isMandatory: true,
-              documentType: DocumentType.PHOTO
+              name: 'Passport Photos',
+              description: '12 standardized passport photos with white background',
+              isRequired: true,
+              documentType: DocumentType.PHOTO,
+              type: 'input'
             },
             {
               id: 'residence-proof',
-              nameKey: 'requirements.residence_proof',
-              descriptionKey: 'requirements.residence_proof_desc',
-              isMandatory: true,
-              documentType: DocumentType.RESIDENCE_PROOF
+              name: 'Proof of Residence',
+              description: 'Recent utility bill or residence certificate from local administration',
+              isRequired: true,
+              documentType: DocumentType.RESIDENCE_PROOF,
+              type: 'input'
             }
           ],
-          processingTime: '48 hours to 3 months',
-          cost: 110000,
+          processtime: '48 hours to 3 months',
+          servicecost: 110000,
           currency: 'XAF',
           providedBy: 'DGSN (Direction Générale de la Sûreté Nationale)',
-          legalTexts: [
-            {
-              id: 'passport-law-1',
-              title: 'Loi N° 2016/007 du 12 juillet 2016 portant Code de la nationalité camerounaise',
-              content: 'Cette loi définit les conditions d\'acquisition, de perte et de recouvrement de la nationalité camerounaise, ainsi que les droits et devoirs qui en découlent...',
-              pdfUrl: '/assets/legal/passport-law-2016.pdf'
-            },
-            {
-              id: 'passport-decree',
-              title: 'Décret N° 2019/286 du 29 mai 2019 fixant les modalités d\'établissement du passeport biométrique',
-              content: 'Ce décret fixe les conditions et modalités d\'établissement, de délivrance et de gestion du passeport biométrique camerounais...',
-              pdfUrl: '/assets/legal/passport-decree-2019.pdf'
-            }
-          ],
-          isImplemented: true,
+          legaltext: 'Loi N° 2016/007 du 12 juillet 2016 portant Code de la nationalité camerounaise. Décret N° 2019/286 du 29 mai 2019 fixant les modalités d\'établissement du passeport biométrique.',
+          published: true,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF, ApplicantType.CHILD]
         },
         {
           id: 'national-id',
           categoryId: 'police-justice',
-          nameKey: 'services.national_id.name',
-          descriptionKey: 'services.national_id.description',
-          detailedDescriptionKey: 'services.national_id.detailed_description',
-          requirements: [
+          pname: 'National Identity Card',
+          shortdesc: 'Apply for national identity card',
+          longdesc: 'Service for requesting a new national identity card or renewing an existing one. The CNI is a mandatory identity document for all Cameroonian citizens.',
+          documents: [
             {
               id: 'birth-cert-ni',
-              nameKey: 'requirements.birth_certificate',
-              descriptionKey: 'requirements.birth_cert_desc',
-              isMandatory: true,
-              documentType: DocumentType.BIRTH_CERTIFICATE
+              name: 'Birth Certificate',
+              description: 'Certified copy of birth certificate (less than 3 months old)',
+              isRequired: true,
+              documentType: DocumentType.BIRTH_CERTIFICATE,
+              type: 'input'
             },
             {
               id: 'photos-ni',
-              nameKey: 'requirements.passport_photos',
-              descriptionKey: 'requirements.passport_photos_desc',
-              isMandatory: true,
-              documentType: DocumentType.PHOTO
+              name: 'Passport Photos',
+              description: '12 standardized passport photos with white background',
+              isRequired: true,
+              documentType: DocumentType.PHOTO,
+              type: 'input'
             }
           ],
-          processingTime: '2-4 weeks',
-          cost: 5000,
+          processtime: '2-4 weeks',
+          servicecost: 5000,
           currency: 'XAF',
           providedBy: 'Ministry of Interior',
-          isImplemented: false,
+          published: false,
+          displayOrder: 2,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         },
         {
           id: 'criminal-record',
           categoryId: 'police-justice',
-          nameKey: 'services.criminal_record.name',
-          descriptionKey: 'services.criminal_record.description',
-          detailedDescriptionKey: 'services.criminal_record.detailed_description',
-          requirements: [
+          pname: 'Criminal Record Extract',
+          shortdesc: 'Request criminal record extract',
+          longdesc: 'Official document certifying the criminal history or clean record of an individual. Required for various administrative procedures including business registration and employment.',
+          documents: [
             {
               id: 'id-card-cr',
-              nameKey: 'requirements.national_id',
-              descriptionKey: 'requirements.national_id_desc',
-              isMandatory: true,
-              documentType: DocumentType.IDENTITY
+              name: 'National Identity Card',
+              description: 'Copy of valid national identity card or consular card',
+              isRequired: true,
+              documentType: DocumentType.IDENTITY,
+              type: 'input'
             }
           ],
-          processingTime: '1-3 days',
-          cost: 1000,
+          processtime: '1-3 days',
+          servicecost: 1000,
           currency: 'XAF',
           providedBy: 'Ministry of Justice',
-          isImplemented: false,
+          published: false,
+          displayOrder: 3,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'family',
-      nameKey: 'categories.family.name',
-      descriptionKey: 'categories.family.description',
+      fname: 'Family',
+      description: 'Civil status documents and family-related services',
       icon: 'fas fa-users',
       color: '#34a853',
-      services: [
+      displayOrder: 2,
+      isActive: true,
+      procedures: [
         {
           id: 'birth-certificate-copy',
           categoryId: 'family',
-          nameKey: 'services.birth_certificate_copy.name',
-          descriptionKey: 'services.birth_certificate_copy.description',
-          detailedDescriptionKey: 'services.birth_certificate_copy.detailed_description',
-          requirements: [
+          pname: 'Certified Copy of Birth Certificate',
+          shortdesc: 'Request a certified copy of birth certificate',
+          longdesc: 'Official service to obtain a certified copy of a birth certificate. The request is processed by the civil registry office where the birth was originally registered. This document is essential for various administrative procedures including passport applications, school enrollment, and legal proceedings.',
+          documents: [
             {
               id: 'request-form',
-              nameKey: 'requirements.request_form',
-              descriptionKey: 'requirements.request_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Request Form',
+              description: 'Completed request form for certified copy',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             },
             {
               id: 'requester-id',
-              nameKey: 'requirements.requester_id',
-              descriptionKey: 'requirements.requester_id_desc',
-              isMandatory: true,
-              documentType: DocumentType.IDENTITY
+              name: 'Requester\'s ID',
+              description: 'Valid identification document of the requester',
+              isRequired: true,
+              documentType: DocumentType.IDENTITY,
+              type: 'input'
             }
           ],
-          processingTime: 'Immediate to 48 hours',
-          cost: 300,
+          processtime: 'Immediate to 48 hours',
+          servicecost: 300,
           currency: 'XAF',
           providedBy: 'Civil Registry Office',
-          legalTexts: [
-            {
-              id: 'civil-status-law',
-              title: 'Ordonnance N° 81-02 du 29 juin 1981 portant organisation de l\'état civil',
-              content: 'Cette ordonnance organise la tenue des registres d\'état civil et définit les procédures de délivrance des actes...',
-              pdfUrl: '/assets/legal/civil-status-law-1981.pdf'
-            }
-          ],
-          isImplemented: true,
+          legaltext: 'Ordonnance N° 81-02 du 29 juin 1981 portant organisation de l\'état civil',
+          published: true,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF, ApplicantType.OTHER]
         },
         {
           id: 'marriage-certificate',
           categoryId: 'family',
-          nameKey: 'services.marriage_certificate.name',
-          descriptionKey: 'services.marriage_certificate.description',
-          detailedDescriptionKey: 'services.marriage_certificate.detailed_description',
-          requirements: [
+          pname: 'Marriage Certificate Copy',
+          shortdesc: 'Request certified copy of marriage certificate',
+          longdesc: 'Official copy of marriage certificate issued by the civil registry office.',
+          documents: [
             {
               id: 'marriage-form',
-              nameKey: 'requirements.request_form',
-              descriptionKey: 'requirements.request_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Request Form',
+              description: 'Completed request form for certified copy',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             }
           ],
-          processingTime: 'Immediate to 24 hours',
-          cost: 300,
+          processtime: 'Immediate to 24 hours',
+          servicecost: 300,
           currency: 'XAF',
           providedBy: 'Civil Registry Office',
-          isImplemented: false,
+          published: false,
+          displayOrder: 2,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF, ApplicantType.OTHER]
         },
         {
           id: 'death-certificate',
           categoryId: 'family',
-          nameKey: 'services.death_certificate.name',
-          descriptionKey: 'services.death_certificate.description',
-          detailedDescriptionKey: 'services.death_certificate.detailed_description',
-          requirements: [
+          pname: 'Death Certificate Copy',
+          shortdesc: 'Request certified copy of death certificate',
+          longdesc: 'Official copy of death certificate issued by the civil registry office.',
+          documents: [
             {
               id: 'death-form',
-              nameKey: 'requirements.request_form',
-              descriptionKey: 'requirements.request_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Request Form',
+              description: 'Completed request form for certified copy',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             }
           ],
-          processingTime: 'Immediate to 24 hours',
-          cost: 300,
+          processtime: 'Immediate to 24 hours',
+          servicecost: 300,
           currency: 'XAF',
           providedBy: 'Civil Registry Office',
-          isImplemented: false,
+          published: false,
+          displayOrder: 3,
+          isActive: true,
           canApplyFor: [ApplicantType.OTHER]
         }
       ]
     },
     {
       id: 'transport',
-      nameKey: 'categories.transport.name',
-      descriptionKey: 'categories.transport.description',
+      fname: 'Transport',
+      description: 'Driving licenses, vehicle registration, and transport permits',
       icon: 'fas fa-car',
       color: '#ff6d01',
-      services: [
+      displayOrder: 3,
+      isActive: true,
+      procedures: [
         {
           id: 'driving-license',
           categoryId: 'transport',
-          nameKey: 'services.driving_license.name',
-          descriptionKey: 'services.driving_license.description',
-          detailedDescriptionKey: 'services.driving_license.detailed_description',
-          requirements: [
+          pname: 'Driving License',
+          shortdesc: 'Apply for driving license',
+          longdesc: 'Service for obtaining a driving license after passing the required theoretical and practical tests.',
+          documents: [
             {
               id: 'driving-form',
-              nameKey: 'requirements.driving_form',
-              descriptionKey: 'requirements.driving_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Driving License Application Form',
+              description: 'Completed driving license application form',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             },
             {
               id: 'medical-cert',
-              nameKey: 'requirements.medical_certificate',
-              descriptionKey: 'requirements.medical_cert_desc',
-              isMandatory: true,
-              documentType: DocumentType.AUTHORIZATION
+              name: 'Medical Certificate',
+              description: 'Medical fitness certificate from authorized physician',
+              isRequired: true,
+              documentType: DocumentType.AUTHORIZATION,
+              type: 'input'
             }
           ],
-          processingTime: '2-4 weeks',
-          cost: 25000,
+          processtime: '2-4 weeks',
+          servicecost: 25000,
           currency: 'XAF',
           providedBy: 'Ministry of Transport',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'education',
-      nameKey: 'categories.education.name',
-      descriptionKey: 'categories.education.description',
+      fname: 'Education',
+      description: 'Diploma certification, educational authorizations, and academic services',
       icon: 'fas fa-graduation-cap',
       color: '#9c27b0',
-      services: [
+      displayOrder: 4,
+      isActive: true,
+      procedures: [
         {
           id: 'diploma-certification',
           categoryId: 'education',
-          nameKey: 'services.diploma_certification.name',
-          descriptionKey: 'services.diploma_certification.description',
-          detailedDescriptionKey: 'services.diploma_certification.detailed_description',
-          requirements: [
+          pname: 'Diploma Certification',
+          shortdesc: 'Certify academic diplomas',
+          longdesc: 'Official certification of academic diplomas for use abroad or for professional purposes.',
+          documents: [
             {
               id: 'diploma-original',
-              nameKey: 'requirements.diploma_original',
-              descriptionKey: 'requirements.diploma_original_desc',
-              isMandatory: true,
-              documentType: DocumentType.AUTHORIZATION
+              name: 'Original Diploma',
+              description: 'Original diploma or certified copy for verification',
+              isRequired: true,
+              documentType: DocumentType.AUTHORIZATION,
+              type: 'input'
             }
           ],
-          processingTime: '1-2 weeks',
-          cost: 5000,
+          processtime: '1-2 weeks',
+          servicecost: 5000,
           currency: 'XAF',
           providedBy: 'Ministry of Higher Education',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'business',
-      nameKey: 'categories.business.name',
-      descriptionKey: 'categories.business.description',
+      fname: 'Business',
+      description: 'Company registration, business permits, and commercial services',
       icon: 'fas fa-briefcase',
       color: '#607d8b',
-      services: [
+      displayOrder: 5,
+      isActive: true,
+      procedures: [
         {
           id: 'business-registration',
           categoryId: 'business',
-          nameKey: 'services.business_registration.name',
-          descriptionKey: 'services.business_registration.description',
-          detailedDescriptionKey: 'services.business_registration.detailed_description',
-          requirements: [
+          pname: 'Business Registration',
+          shortdesc: 'Register a new business',
+          longdesc: 'Complete business registration process including commercial registry inscription and tax registration.',
+          documents: [
             {
               id: 'business-form',
-              nameKey: 'requirements.business_form',
-              descriptionKey: 'requirements.business_form_desc',
-              isMandatory: true,
-              documentType: DocumentType.FORM
+              name: 'Business Registration Form',
+              description: 'Completed business registration application form',
+              isRequired: true,
+              documentType: DocumentType.FORM,
+              type: 'input'
             }
           ],
-          processingTime: '1-2 weeks',
-          cost: 50000,
+          processtime: '1-2 weeks',
+          servicecost: 50000,
           currency: 'XAF',
           providedBy: 'CFCE (Centre de Formalités de Création d\'Entreprises)',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'public-service',
-      nameKey: 'categories.public_service.name',
-      descriptionKey: 'categories.public_service.description',
+      fname: 'Public Service',
+      description: 'Civil service applications and administrative procedures',
       icon: 'fas fa-user-tie',
       color: '#795548',
-      services: [
+      displayOrder: 6,
+      isActive: true,
+      procedures: [
         {
           id: 'civil-service-application',
           categoryId: 'public-service',
-          nameKey: 'services.civil_service_application.name',
-          descriptionKey: 'services.civil_service_application.description',
-          detailedDescriptionKey: 'services.civil_service_application.detailed_description',
-          requirements: [],
-          processingTime: '1-3 months',
-          cost: 0,
+          pname: 'Civil Service Application',
+          shortdesc: 'Apply for civil service positions',
+          longdesc: 'Application process for civil service competitions and government positions.',
+          documents: [],
+          processtime: '1-3 months',
+          servicecost: 0,
           currency: 'XAF',
           providedBy: 'Ministry of Public Service',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'land-construction',
-      nameKey: 'categories.land_construction.name',
-      descriptionKey: 'categories.land_construction.description',
+      fname: 'Land & Construction',
+      description: 'Land titles, building permits, and property certificates',
       icon: 'fas fa-home',
       color: '#4caf50',
-      services: [
+      displayOrder: 7,
+      isActive: true,
+      procedures: [
         {
           id: 'land-title',
           categoryId: 'land-construction',
-          nameKey: 'services.land_title.name',
-          descriptionKey: 'services.land_title.description',
-          detailedDescriptionKey: 'services.land_title.detailed_description',
-          requirements: [],
-          processingTime: '3-6 months',
-          cost: 100000,
+          pname: 'Land Title',
+          shortdesc: 'Obtain land title',
+          longdesc: 'Process for obtaining official land ownership titles and property certificates.',
+          documents: [],
+          processtime: '3-6 months',
+          servicecost: 100000,
           currency: 'XAF',
           providedBy: 'Ministry of State Property',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'consular',
-      nameKey: 'categories.consular.name',
-      descriptionKey: 'categories.consular.description',
+      fname: 'Consular Services',
+      description: 'Visa applications and document legalization',
       icon: 'fas fa-passport',
       color: '#2196f3',
-      services: [
+      displayOrder: 8,
+      isActive: true,
+      procedures: [
         {
           id: 'visa-application',
           categoryId: 'consular',
-          nameKey: 'services.visa_application.name',
-          descriptionKey: 'services.visa_application.description',
-          detailedDescriptionKey: 'services.visa_application.detailed_description',
-          requirements: [],
-          processingTime: '1-4 weeks',
-          cost: 50000,
+          pname: 'Visa Application',
+          shortdesc: 'Apply for travel visa',
+          longdesc: 'Application process for travel visas to various countries through consular services.',
+          documents: [],
+          processtime: '1-4 weeks',
+          servicecost: 50000,
           currency: 'XAF',
           providedBy: 'Ministry of External Relations',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'health',
-      nameKey: 'categories.health.name',
-      descriptionKey: 'categories.health.description',
+      fname: 'Health',
+      description: 'Healthcare facility authorizations and medical services',
       icon: 'fas fa-heartbeat',
       color: '#f44336',
-      services: [
+      displayOrder: 9,
+      isActive: true,
+      procedures: [
         {
           id: 'health-facility-authorization',
           categoryId: 'health',
-          nameKey: 'services.health_facility_authorization.name',
-          descriptionKey: 'services.health_facility_authorization.description',
-          detailedDescriptionKey: 'services.health_facility_authorization.detailed_description',
-          requirements: [],
-          processingTime: '1-3 months',
-          cost: 200000,
+          pname: 'Health Facility Authorization',
+          shortdesc: 'Authorization to operate health facilities',
+          longdesc: 'Licensing process for opening and operating healthcare facilities including clinics and pharmacies.',
+          documents: [],
+          processtime: '1-3 months',
+          servicecost: 200000,
           currency: 'XAF',
           providedBy: 'Ministry of Public Health',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
     },
     {
       id: 'civic-life',
-      nameKey: 'categories.civic_life.name',
-      descriptionKey: 'categories.civic_life.description',
+      fname: 'Civic Life',
+      description: 'Event permits and civic activities authorization',
       icon: 'fas fa-flag',
       color: '#ff9800',
-      services: [
+      displayOrder: 10,
+      isActive: true,
+      procedures: [
         {
           id: 'event-authorization',
           categoryId: 'civic-life',
-          nameKey: 'services.event_authorization.name',
-          descriptionKey: 'services.event_authorization.description',
-          detailedDescriptionKey: 'services.event_authorization.detailed_description',
-          requirements: [],
-          processingTime: '1-2 weeks',
-          cost: 10000,
+          pname: 'Event Authorization',
+          shortdesc: 'Authorization for public events',
+          longdesc: 'Permit application for organizing public events, demonstrations, and cultural activities.',
+          documents: [],
+          processtime: '1-2 weeks',
+          servicecost: 10000,
           currency: 'XAF',
           providedBy: 'Prefecture',
-          isImplemented: false,
+          published: false,
+          displayOrder: 1,
+          isActive: true,
           canApplyFor: [ApplicantType.SELF]
         }
       ]
@@ -444,12 +488,12 @@ export class ServicesDataService {
 
   getServicesByCategory(categoryId: string): Observable<Service[]> {
     const category = this.serviceCategories.find(cat => cat.id === categoryId);
-    return of(category?.services || []);
+    return of(category?.procedures || []);
   }
 
   getServiceById(serviceId: string): Observable<Service | undefined> {
     for (const category of this.serviceCategories) {
-      const service = category.services.find(s => s.id === serviceId);
+      const service = category.procedures.find(s => s.id === serviceId);
       if (service) {
         return of(service);
       }
@@ -462,10 +506,10 @@ export class ServicesDataService {
     const searchTerm = query.toLowerCase();
 
     for (const category of this.serviceCategories) {
-      for (const service of category.services) {
-        if (service.nameKey.toLowerCase().includes(searchTerm) ||
-          service.descriptionKey.toLowerCase().includes(searchTerm) ||
-          service.detailedDescriptionKey.toLowerCase().includes(searchTerm)) {
+      for (const service of category.procedures) {
+        if (service.pname.toLowerCase().includes(searchTerm) ||
+          service.shortdesc.toLowerCase().includes(searchTerm) ||
+          service.longdesc.toLowerCase().includes(searchTerm)) {
           results.push(service);
         }
       }
