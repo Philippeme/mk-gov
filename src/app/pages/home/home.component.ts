@@ -1,122 +1,100 @@
-<div class="home-page">
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="row align-items-center min-vh-50">
-                <div class="col-lg-6">
-                    <div class="hero-content">
-                        <h1 class="hero-title">{{ 'app.welcome' | translate }}</h1>
-                        <p class="hero-subtitle">{{ 'app.subtitle' | translate }}</p>
-                        <div class="search-container mt-4">
-                            <div class="input-group input-group-lg">
-                                <input type="text" class="form-control search-input" [(ngModel)]="searchQuery"
-                                    (keyup.enter)="onSearch()" placeholder="Search for services...">
-                                <button class="btn btn-primary search-btn" (click)="onSearch()">
-                                    <i class="fas fa-search"></i>
-                                    {{ 'buttons.search' | translate }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="hero-image text-center">
-                        <img src="assets/images/Flag_of_Guinea-Bissau.svg.png" alt="Cameroon" class="img-fluid" style="max-width: 350px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { ServicesDataService } from '../../services/services-data.service';
+import { AuthService } from '../../services/auth.service';
+import { ServiceCategory, Service } from '../../models/service.model';
+import { ApiService } from '../../services/api.service';
+import { ServiceModalComponent } from '../../components/modals/service-modal/service-modal.component';
+import { LoginModalComponent } from '../../components/modals/login-modal/login-modal.component';
+import { SubscriptionLoggable } from 'rxjs/internal/testing/SubscriptionLoggable';
 
-    <!-- Service Categories Section -->
-    <section class="categories-section py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h2 class="section-title text-center mb-5">Government Services</h2>
-                </div>
-            </div>
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit {
+  serviceCategories: ServiceCategory[]  = [];
+  searchQuery = '';
+  isLoading = false;
 
-            <!-- Loading State -->
-            <div class="text-center" *ngIf="isLoading">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
+  constructor(
+    private router: Router,
+    private modalService: NgbModal,
+    private servicesDataService: ServicesDataService,
+    private authService: AuthService,
+    private translate: TranslateService,
+    private apiService: ApiService
+  ) { }
 
-            <!-- Service Categories Grid -->
-            <div class="row g-4" *ngIf="!isLoading">
-                <div class="col-lg-4 col-md-6" *ngFor="let category of serviceCategories">
-                    <div class="category-card" (click)="onCategoryClick(category.id)">
-                        <div class="category-header">
-                            <div class="category-icon">
-                                <i [class]="getCategoryIcon(category.icon)"></i>
-                            </div>
-                            <h4 class="category-title">{{ category.fname }}</h4>
-                        </div>
-                        <p class="category-description">{{ category.description }}</p>
+  ngOnInit(): void {
+    this.getServiceCategories();
+  }
 
-                        <!-- Services List -->
-                        <div class="services-list" *ngIf="category.procedures && category.procedures.length > 0">
-                            <h6 class="services-title">Available Services:</h6>
-                            <ul class="list-unstyled">
-                                <li *ngFor="let service of category.procedures | slice:0:3" class="service-link"
-                                    (click)="onServiceClick(service); $event.stopPropagation()">
-                                    <i class="fas fa-chevron-right me-2"></i>
-                                    {{ service.pname }}
-                                    <span class="badge bg-success ms-2" *ngIf="service.published">Live</span>
-                                    <span class="badge bg-secondary ms-2" *ngIf="!service.published">Soon</span>
-                                </li>
-                                <li *ngIf="category.procedures.length > 3" class="text-muted small">
-                                    +{{ category.procedures.length - 3 }} more services
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+ getServiceCategories(): any {
+  this.apiService.get<ServiceCategory[]>('/families').subscribe({
+    next: (data:ServiceCategory[]) => {
+      this.serviceCategories = data;
+      console.log('Service categories loaded:', this.serviceCategories);
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Erreur de chargement:', err);
+    }
+  });
+}
 
-    <!-- Quick Actions Section -->
-    <section class="quick-actions-section py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h3 class="mb-4">Quick Actions</h3>
-                </div>
-            </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-3 col-sm-6">
-                    <div class="quick-action-card" routerLink="/procedures">
-                        <i class="fas fa-list-alt"></i>
-                        <h5>Browse Procedures</h5>
-                        <p>Explore all available government services</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="quick-action-card" routerLink="/search-files">
-                        <i class="fas fa-search"></i>
-                        <h5>Track Application</h5>
-                        <p>Search and track your submitted applications</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="quick-action-card" routerLink="/registration">
-                        <i class="fas fa-user-plus"></i>
-                        <h5>Create Account</h5>
-                        <p>Register to access government services</p>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <div class="quick-action-card"
-                        (click)="getPassportService() && onServiceClick(getPassportService()!)">
-                        <i class="fas fa-passport"></i>
-                        <h5>Apply for Passport</h5>
-                        <p>Start your passport application process</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+  onServiceClick(service: Service): void {
+    if (!this.authService.isAuthenticated()) {
+      const loginModal = this.modalService.open(LoginModalComponent, {
+        centered: true,
+        backdrop: 'static'
+      });
+
+      loginModal.result.then((result) => {
+        if (result === 'login_success') {
+          this.openServiceModal(service);
+        }
+      });
+    } else {
+      this.openServiceModal(service);
+    }
+  }
+
+  private openServiceModal(service: Service): void {
+    const modalRef = this.modalService.open(ServiceModalComponent, {
+      centered: true,
+      size: 'lg'
+    });
+
+    modalRef.componentInstance.service = service;
+  }
+
+  onCategoryClick(categoryId: number): void {
+    this.router.navigate(['/procedures', categoryId]);
+  }
+
+  onSearch(): void {
+    if (this.searchQuery.trim()) {
+      this.router.navigate(['/procedures'], {
+        queryParams: { search: this.searchQuery.trim() }
+      });
+    }
+  }
+
+  getCategoryIcon(icon: string): string {
+    return icon;
+  }
+
+  getPassportService(): Service | null {
+    for (const category of this.serviceCategories) {
+      const passportService = category.procedures.find((service: Service) => service.id === 1);
+      if (passportService) {
+        return passportService;
+      }
+    }
+    return null;
+  }
+}
