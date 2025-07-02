@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { ServicesDataService } from '../../services/services-data.service';
 import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
 import { ServiceCategory, Service } from '../../models/service.model';
 import { ServiceModalComponent } from '../../components/modals/service-modal/service-modal.component';
 
@@ -15,9 +16,9 @@ import { ServiceModalComponent } from '../../components/modals/service-modal/ser
 export class ProceduresComponent implements OnInit {
   serviceCategories: ServiceCategory[] = [];
   filteredServices: Service[] = [];
-  selectedCategory: string | null = null;
+  selectedCategory: number | null = null;
   searchQuery = '';
-  isLoading = true;
+  isLoading = false;
   viewMode: 'categories' | 'services' = 'categories';
 
   constructor(
@@ -26,18 +27,20 @@ export class ProceduresComponent implements OnInit {
     private modalService: NgbModal,
     private servicesDataService: ServicesDataService,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
     this.loadServiceCategories();
+    this.getServiceCategories();
 
     // Handle route parameters
     this.route.params.subscribe(params => {
       if (params['category']) {
-        this.selectedCategory = params['category'];
+        this.selectedCategory = parseInt(params['category'], 10);
         this.viewMode = 'services';
-        this.loadCategoryServices(params['category']);
+        this.loadCategoryServices(this.selectedCategory);
       }
     });
 
@@ -50,23 +53,28 @@ export class ProceduresComponent implements OnInit {
     });
   }
 
+  getServiceCategories(): any {
+  this.apiService.get<ServiceCategory[]>('/families').subscribe({
+    next: (data:ServiceCategory[]) => {
+      this.serviceCategories = data;
+      console.log('Service categories loaded:', this.serviceCategories);
+      this.isLoading = false;
+    },
+    error: (err) => {
+      console.error('Erreur de chargement:', err);
+    }
+  });
+}
+
   private loadServiceCategories(): void {
-    this.servicesDataService.getServiceCategories().subscribe({
-      next: (categories) => {
-        this.serviceCategories = categories;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading service categories:', error);
-        this.isLoading = false;
-      }
-    });
+    this.servicesDataService.getServiceCategories()
   }
 
-  private loadCategoryServices(categoryId: string): void {
+  private loadCategoryServices(categoryId: number): void {
     this.servicesDataService.getServicesByCategory(categoryId).subscribe({
       next: (services) => {
         this.filteredServices = services;
+        console.log('Loaded services for category:', categoryId, this.filteredServices);
         this.isLoading = false;
       },
       error: (error) => {
@@ -76,12 +84,12 @@ export class ProceduresComponent implements OnInit {
     });
   }
 
-  onCategoryClick(categoryId: string): void {
+  onCategoryClick(categoryId: number): void {
     this.router.navigate(['/procedures', categoryId]);
   }
 
   onServiceClick(service: Service): void {
-    if (service.isImplemented) {
+    if (service.published) {
       // Navigate to service detail page first
       this.router.navigate(['/service-detail', service.id]);
     } else {
@@ -127,7 +135,7 @@ export class ProceduresComponent implements OnInit {
     this.router.navigate(['/procedures']);
   }
 
-  getCategoryById(categoryId: string | null): ServiceCategory | undefined {
+  getCategoryById(categoryId: number | null): ServiceCategory | undefined {
     if (!categoryId) {
       return undefined;
     }
@@ -139,8 +147,8 @@ export class ProceduresComponent implements OnInit {
   }
 
   // Helper method for template to safely get category name
-  getCategoryName(categoryId: string | null): string {
+  getCategoryName(categoryId: number | null): string {
     const category = this.getCategoryById(categoryId);
-    return category ? category.nameKey : '';
+    return category ? category.fname : '';
   }
 }
